@@ -4,40 +4,40 @@
 /**
  * handle_write_char - Prints a string
  * @c: char types.
- * @buffer: The buffer array to handle print
- * @flags:  Evaluates active flags.
- * @width: gets the width.
- * @prec: precision specifier
- * @size: The size specifier
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags.
+ * @width: get width.
+ * @precision: precision specifier
+ * @size: Size specifier
  *
- * Return: The number of characters to be printed.
+ * Return: Number of chars printed.
  */
 int handle_write_char(char c, char buffer[],
-	int flags, int width, int prec, int size)
+	int flags, int width, int precision, int size)
 { /* char is stored at left and paddind at buffer's right */
-	int index = 0;
+	int i = 0;
 	char padd = ' ';
 
-	UNUSED(prec);
+	UNUSED(precision);
 	UNUSED(size);
 
 	if (flags & F_ZERO)
 		padd = '0';
 
-	buffer[index++] = c;
-	buffer[index] = '\0';
+	buffer[i++] = c;
+	buffer[i] = '\0';
 
 	if (width > 1)
 	{
 		buffer[BUFF_SIZE - 1] = '\0';
-		for (index = 0; index < width - 1; index++)
-			buffer[BUFF_SIZE - index - 2] = padd;
+		for (i = 0; i < width - 1; i++)
+			buffer[BUFF_SIZE - i - 2] = padd;
 
 		if (flags & F_MINUS)
 			return (write(1, &buffer[0], 1) +
-					write(1, &buffer[BUFF_SIZE - index - 1], width - 1));
+					write(1, &buffer[BUFF_SIZE - i - 1], width - 1));
 		else
-			return (write(1, &buffer[BUFF_SIZE - index - 1], width - 1) +
+			return (write(1, &buffer[BUFF_SIZE - i - 1], width - 1) +
 					write(1, &buffer[0], 1));
 	}
 
@@ -47,18 +47,18 @@ int handle_write_char(char c, char buffer[],
 /************************* WRITE NUMBER *************************/
 /**
  * write_number - Prints a string
- * @is_negative: The list of arguments
- * @ind: character types.
- * @buffer: The buffer array to handle print
- * @flags:  Evaluates active flags
- * @width: gets the width.
- * @prec: The precision specifier
- * @size: The Size specifier
+ * @is_negative: Lista of arguments
+ * @ind: char types.
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width.
+ * @precision: precision specifier
+ * @size: Size specifier
  *
  * Return: Number of chars printed.
  */
 int write_number(int is_negative, int ind, char buffer[],
-	int flags, int width, int prec, int size)
+	int flags, int width, int precision, int size)
 {
 	int length = BUFF_SIZE - ind - 1;
 	char padd = ' ', extra_ch = 0;
@@ -74,7 +74,7 @@ int write_number(int is_negative, int ind, char buffer[],
 	else if (flags & F_SPACE)
 		extra_ch = ' ';
 
-	return (write_num(ind, buffer, flags, width, prec,
+	return (write_num(ind, buffer, flags, width, precision,
 		length, padd, extra_ch));
 }
 
@@ -144,14 +144,14 @@ int write_num(int ind, char buffer[],
  * @buffer: Array of chars
  * @flags: Flags specifiers
  * @width: Width specifier
- * @prec: Precision specifier
+ * @precision: Precision specifier
  * @size: Size specifier
  *
  * Return: Number of written chars.
  */
 int write_unsgnd(int is_negative, int ind,
 	char buffer[],
-	int flags, int width, int prec, int size)
+	int flags, int width, int precision, int size)
 {
 	/* The number is stored at the bufer's right and starts at position i */
 	int length = BUFF_SIZE - ind - 1, i = 0;
@@ -160,13 +160,13 @@ int write_unsgnd(int is_negative, int ind,
 	UNUSED(is_negative);
 	UNUSED(size);
 
-	if (prec == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0')
+	if (precision == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0')
 		return (0); /* printf(".0d", 0)  no char is printed */
 
-	if (prec > 0 && prec < length)
+	if (precision > 0 && precision < length)
 		padd = ' ';
 
-	while (prec > length)
+	while (precision > length)
 	{
 		buffer[--ind] = '0';
 		length++;
@@ -200,7 +200,7 @@ int write_unsgnd(int is_negative, int ind,
  * @buffer: Arrays of chars
  * @ind: Index at which the number starts in the buffer
  * @length: Length of number
- * @width: The width specifier
+ * @width: Wwidth specifier
  * @flags: Flags specifier
  * @padd: Char representing the padding
  * @extra_c: Char representing extra char

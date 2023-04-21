@@ -1,11 +1,12 @@
 #include "main.h"
 
 /**
- * is_printable - Checks if a character is printable
- * @c: The character to be checked
+ * is_printable - evaluates if a char is printable
+ * @c: char to be evaluated.
  *
- * Return: 1 if character c is printable, 0 otherwise
+ * Return: 1 if c is printable, 0 otherwise
  */
+
 int is_printable(char c)
 {
 	if (c >= 32 && c < 127)
@@ -15,10 +16,10 @@ int is_printable(char c)
 }
 
 /**
- * append_hexa_code - Appends ascci in hexadecimal format to buffer
- * @buffer: Array of characters
- * @i: the index to start appending.
- * @ascii_code:  The ASSCI CODE.
+ * append_hexa_code - append ascii in hexadecimal code to buffer
+ * @buffer: array of chars.
+ * @i: index at which to start appending.
+ * @ascii_code: ASCII CODE.
  * Return: Always 3
  */
 int append_hexa_code(char ascii_code, char buffer[], int i)
@@ -38,8 +39,8 @@ int append_hexa_code(char ascii_code, char buffer[], int i)
 }
 
 /**
- * is_digit - checks if a char is a digit
- * @c: the character to be checked
+ * is_digit - verifies if a char is a digit
+ * @c: char to be check
  *
  * Return: 1 if c is a digit, 0 otherwise
  */
@@ -52,11 +53,11 @@ int is_digit(char c)
 }
 
 /**
- * convert_size_number - Casts a number to the specified size
- * @num: The number to be casted.
- * @size: The number indicating the type to be casted.
+ * convert_size_number - casts a number to the specified size
+ * @num: number to be casted.
+ * @size: number indicating the type to be casted.
  *
- * Return: Casted value of num
+ * Return: casted value of num
  */
 long int convert_size_number(long int num, int size)
 {
@@ -69,11 +70,11 @@ long int convert_size_number(long int num, int size)
 }
 
 /**
- * convert_size_unsgnd - Casts a number to the specified size
- * @num: Number to be casted
- * @size: Number indicating the type to be casted
+ * convert_size_unsgnd - casts a number to the specified size
+ * @num: number to be casted
+ * @size: number indicating the type to be casted
  *
- * Return: Casted value of num
+ * Return: casted value of num
  */
 long int convert_size_unsgnd(unsigned long int num, int size)
 {
